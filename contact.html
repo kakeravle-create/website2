@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon - Gradient Badge -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23667eea'/><stop offset='100%25' style='stop-color:%23764ba2'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23g)'/><path d='M 30 50 L 45 65 L 70 35' stroke='white' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    
+    <!-- SEO Meta Tags -->
+    <title>Contact Us - Get Support | CertifyMyCrypto</title>
+    <meta name="description" content="Contact CertifyMyCrypto support team for help with wallet verification, technical issues, or general inquiries. We try to respond within 24 hours.">
+    <meta name="keywords" content="contact CertifyMyCrypto, crypto verification support, wallet verification help, AML support email">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Contact CertifyMyCrypto Support">
+    <meta property="og:description" content="Get help with your AML verification. Our support team is here to assist you.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://certifymycrypto.com/contact">
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Page-Specific Styles -->
+    <style>
+        .contact-hero {
+            margin-top: 70px;
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .contact-hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+        }
+
+        .contact-content {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .info-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .info-card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .info-card p {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .info-card a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .info-card a:hover {
+            color: #764ba2;
+        }
+
+        .contact-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .form-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .form-subtitle {
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: 0.3s;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .form-submit:disabled {
+            background: #94a3b8;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .success-message {
+            display: none;
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            color: #065f46;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .error-message {
+            display: none;
+            background: #fef2f2;
+            border: 2px solid #ef4444;
+            color: #991b1b;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .quick-links {
+            background: #f8fafc;
+            padding: 60px 5%;
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .quick-link-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .quick-link-card:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+        }
+
+        .quick-link-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .quick-link-card h3 {
+            font-size: 18px;
+            color: #1e293b;
+            margin-bottom: 10px;
+        }
+
+        .quick-link-card p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .response-time {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 5%;
+            text-align: center;
+        }
+
+        .response-time h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .response-time p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 32px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-form-container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="/" class="logo">🛡️ CertifyMyCrypto</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/how-it-works">How It Works</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/#verify" class="nav-cta">Verify Now</a></li>
+        </ul>
+    </nav>
+
+   <!-- Hero Section -->
+    <section class="contact-hero">
+        <h1>Get in Touch</h1>
+        <p>Have questions? We're here to help! Reach out to our support team.</p>
+    </section>
+
+    <!-- Contact Content -->
+    <div class="contact-content">
+        <div class="contact-grid">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-card-icon">📧</div>
+                    <h3>Email Us</h3>
+                    <p>Send us an email and we'll try to respond within 24 hours.</p>
+                    <a href="mailto:contact@certifymycrypto.com">
+                        contact@certifymycrypto.com
+                        <span>→</span>
+                    </a>
+                </div>
+    
+                <div class="info-card">
+                    <div class="info-card-icon">💬</div>
+                    <h3>Live Chat</h3>
+                    <p>Chat with our support team in real-time during business hours.</p>
+                    <a href="#" onclick="alert('Live chat opening soon!'); return false;">
+                        Start Chat
+                        <span>→</span>
+                    </a>
+                </div>
+    
+                <div class="info-card">
+                    <div class="info-card-icon">📚</div>
+                    <h3>Help Center</h3>
+                    <p>Find answers to common questions in our FAQ section.</p>
+                    <a href="/faq">
+                        Browse FAQ
+                        <span>→</span>
+                    </a>
+                </div>
+    
+                <div class="info-card">
+                    <div class="info-card-icon">🐦</div>
+                    <h3>Social Media</h3>
+                    <p>Follow us for updates and quick support responses.</p>
+                    <a href="#" onclick="alert('Social links coming soon!'); return false;">
+                        Follow Us
+                        <span>→</span>
+                    </a>
+                </div>
+            </div>
+    
+            <!-- Contact Form -->
+            <div class="contact-form-container">
+                <h2 class="form-title">Send us a Message</h2>
+                <p class="form-subtitle">Fill out the form below and we'll get back to you soon.</p>
+    
+                <div id="successMessage" class="success-message">
+                    <strong>✅ Message Sent Successfully!</strong><br>
+                    Thank you for contacting us. We'll try to respond within 24 hours.
+                </div>
+    
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label" for="name">Full Name *</label>
+                        <input type="text" name="name" id="name" class="form-input" placeholder="John Doe" required>
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email Address *</label>
+                        <input type="email" name="email" id="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="form-label" for="subject">Subject *</label>
+                        <select name="subject" id="subject" class="form-select" required>
+                            <option value="">Select a subject...</option>
+                            <option value="Technical Support">Technical Support</option>
+                            <option value="Verification Issue">Verification Issue</option>
+                            <option value="Certificate Question">Certificate Question</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Partnership/Business">Partnership/Business</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="form-label" for="wallet">Wallet Address (Optional)</label>
+                        <input type="text" name="wallet" id="wallet" class="form-input" placeholder="0x...">
+                    </div>
+    
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message *</label>
+                        <textarea name="message" id="message" class="form-textarea" placeholder="Describe your question or issue in detail..." required></textarea>
+                    </div>
+    
+                    <button type="submit" class="form-submit" id="submitBtn">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Response Time Banner -->
+    <section class="response-time">
+        <h2>⚡ 24-Hour Response Time</h2>
+        <p>We typically respond to all inquiries within 24 hours during business days</p>
+    </section>
+    
+    <!-- Quick Links -->
+    <section class="quick-links">
+        <div class="quick-links-grid">
+            <a href="/faq" class="quick-link-card">
+                <div class="quick-link-icon">❓</div>
+                <h3>FAQ</h3>
+                <p>Quick answers to common questions</p>
+            </a>
+    
+            <a href="/about" class="quick-link-card">
+                <div class="quick-link-icon">🏢</div>
+                <h3>About Us</h3>
+                <p>Learn more about our mission</p>
+            </a>
+    
+            <a href="/#verify" class="quick-link-card">
+                <div class="quick-link-icon">✓</div>
+                <h3>Start Verification</h3>
+                <p>Verify your wallet now</p>
+            </a>
+    
+            <a href="/privacy" class="quick-link-card">
+                <div class="quick-link-icon">🔒</div>
+                <h3>Privacy & Terms</h3>
+                <p>Our policies and guidelines</p>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>CertifyMyCrypto</h4>
+                <p style="color: #94a3b8;">Professional cryptocurrency AML compliance verification service.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/how-it-works">How It Works</a></li>
+                    <li><a href="/security">Security</a></li>
+                    <li><a href="/use-cases">Use Cases</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 CertifyMyCrypto. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- Shared JavaScript -->
+    <script src="assets/js/shared.js"></script>
+    
+    <!-- Page-Specific JavaScript -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const form = document.getElementById('contactForm');
+            const successMsg = document.getElementById('successMessage');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            
+            // Simulate sending (wait 1 second)
+            setTimeout(() => {
+                // Show success message
+                successMsg.classList.add('show');
+                
+                // Hide the form
+                form.style.display = 'none';
+                
+                // Scroll to success message
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 1000);
+        });
+    </script>
+    </body>
+    </html>

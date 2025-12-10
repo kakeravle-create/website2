@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon - Custom Gradient Badge -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23667eea'/><stop offset='100%25' style='stop-color:%23764ba2'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23g)'/><path d='M 30 50 L 45 65 L 70 35' stroke='white' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+
+    <title>Admin Dashboard - Trading Service</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        
+        /* Admin Login Styles */
+        #adminLoginRoot {
+            min-height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .admin-login-card {
+            background: rgba(255,255,255,0.14);
+            border-radius: 20px;
+            box-shadow: 0 8px 36px 0 rgba(46,31,90,0.15), 0 2px 12px rgba(40,40,112,0.06);
+            padding: 42px 38px 36px 38px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 340px;
+            max-width: 97vw;
+            margin-top: 11vh;
+        }
+        .admin-login-header {
+            font-size: 2.32rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            margin-bottom: 30px;
+            color: #fff;
+            text-align: center;
+            text-shadow: 0 2px 18px #21105b4a, 0 8px 40px #2f3f9041;
+            background: linear-gradient(90deg, #bbf0fe 20%, #47a6ff 65%, #8fbfff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+        .login-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            margin-bottom: 4px;
+            justify-content: center;
+        }
+        .admin-input {
+            font-size: 18px;
+            border-radius: 8px;
+            border: 1.7px solid #B4C7F5;
+            padding: 13px 16px;
+            width: 220px;
+            max-width: 62vw;
+            background: #fff;
+            outline: none;
+            box-shadow: 0 1px 5px rgba(80,129,238,0.08);
+            transition: border 0.19s;
+        }
+        .admin-input:focus { border: 2px solid #51a0f4; }
+        .admin-btn {
+            background: #47a6ff;
+            color: #fff;
+            border-radius: 8px;
+            border: none;
+            font-size: 17px;
+            padding: 13px 33px;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 2px 12px rgba(85,112,255,0.13);
+            transition: background 0.18s;
+        }
+        .admin-btn:hover { background: #357ccd; }
+
+        /* Dashboard Styles (unchanged) */
+        .container { max-width: 1400px; margin: 0 auto; background: white; border-radius: 20px; padding: 40px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);}
+        h1 { color: #1e293b; margin-bottom: 10px; display: flex; align-items: center; gap: 15px;}
+        .subtitle { color: #64748b; margin-bottom: 30px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;}
+        .stat-card { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; text-align: center;}
+        .stat-number { font-size: 48px; font-weight: bold; margin: 10px 0;}
+        .stat-label { font-size: 14px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px;}
+        .controls { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;}
+        button { background: #3b82f6; color: white; border: none; padding: 12px 24px; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s;}
+        button:hover { background: #2563eb; transform: translateY(-2px);}
+        .admin-logout { background: #ef4444 !important; color: #fff; margin-bottom: 22px; margin-left: auto; border-radius: 8px !important; font-size: 15px !important; padding: 10px 24px !important; font-weight: 600; cursor: pointer; box-shadow: 0 1px 9px #e0856f3d; transition: background 0.17s;}
+        .admin-logout:hover { background: #d03800 !important; }
+        .table-container { overflow-x: auto; border-radius: 10px; border: 1px solid #e2e8f0;}
+        table { width: 100%; border-collapse: collapse;}
+        th { background: #f1f5f9; padding: 15px; text-align: left; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0;}
+        td { padding: 15px; border-bottom: 1px solid #e2e8f0;}
+        tr:hover { background: #f8fafc;}
+        .wallet-address { font-family: monospace; font-size: 13px; color: #3b82f6;}
+        .loading { text-align: center; padding: 60px; color: #64748b;}
+        .spinner { border: 3px solid #f3f3f3; border-top: 3px solid #3b82f6; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px;}
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}
+        .empty-state { text-align: center; padding: 80px 20px; color: #64748b;}
+        .empty-icon { font-size: 80px; margin-bottom: 20px; }
+        .copy-btn { background: #10b981; padding: 6px 12px; font-size: 12px; border-radius: 6px; margin-right: 5px;}
+        .copy-btn:hover { background: #059669; }
+        .delete-btn { background: #ef4444; padding: 6px 12px; font-size: 12px; border-radius: 6px;}
+        .delete-btn:hover { background: #dc2626; }
+        .wakeup-state { text-align: center; padding: 60px 20px;}
+        .wakeup-icon { font-size: 60px; margin-bottom: 20px; animation: pulse 1.5s infinite;}
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.1); }}
+        .wakeup-title { font-size: 20px; color: #1e293b; margin-bottom: 10px; font-weight: 600;}
+        .wakeup-message { color: #64748b; font-size: 14px; margin-bottom: 20px;}
+        .retry-info { background: #f8fafc; padding: 15px; border-radius: 10px; display: inline-block; margin-top: 15px;}
+    </style>
+</head>
+<body>
+
+    <div id="adminLoginRoot">
+        <div class="admin-login-card">
+            <div class="admin-login-header">Admin Login</div>
+            <div class="login-row">
+                <input type="password" id="adminPassword" class="admin-input" placeholder="Enter admin password" autocomplete="current-password">
+                <button class="admin-btn" onclick="adminLogin()">Login</button>
+            </div>
+            <p id="loginError" style="color:#ef4444; margin-top:1.1em; font-size: 1.07em; display:none;">❌ Incorrect password. Please try again.</p>
+        </div>
+    </div>
+
+    <div class="container" id="adminDashboard" style="display:none;">
+        <h1>👥 Admin Dashboard</h1>
+        <p class="subtitle">TradingServiceHQ - User Management Panel</p>
+        <button class="admin-logout" onclick="adminLogout()">Logout</button>
+        <div class="stats">
+            <div class="stat-card"><div class="stat-label">Total Users</div><div class="stat-number" id="totalUsers">-</div></div>
+            <div class="stat-card"><div class="stat-label">Last 24 Hours</div><div class="stat-number" id="recentUsers">-</div></div>
+        </div>
+        <div class="controls">
+            <button onclick="loadUsers()">🔄 Refresh Users</button>
+            <button id="autoRefreshBtn" onclick="autoRefresh()">⚡ Auto-Refresh (30s)</button>
+            <button onclick="exportCSV()">📥 Export CSV</button>
+        </div>
+        <div id="loading" class="loading" style="display:none;"><div class="spinner"></div><p>Loading users from backend...</p></div>
+        <div id="wakeupState" class="wakeup-state" style="display:none;"><div class="wakeup-icon">⏳</div><div class="wakeup-title">Waking up server...</div><div class="wakeup-message">Free tier services take 30-60 seconds to start after inactivity.<br>Please wait while we connect to the backend.</div><div class="retry-info"><strong>Retry attempt:</strong> <span id="retryCount">0</span>/3<br><small style="color:#64748b;">Auto-retrying every 10 seconds...</small></div></div>
+        <div id="emptyState" class="empty-state" style="display:none;"><div class="empty-icon">📭</div><h3>No users yet</h3><p>Users will appear here after they connect their wallet on your website.</p></div>
+        <div id="errorState" class="empty-state" style="display:none;"><div class="empty-icon">📡</div><h3 style="color:#ef4444;">Unable to connect to backend</h3><p>Backend may be starting up. Please wait 1 minute and try again.</p><button onclick="location.reload()" style="margin-top:20px;">🔄 Refresh Page</button></div>
+        <div id="tableContainer" class="table-container" style="display:none;">
+            <table>
+                <thead>
+                    <tr><th>#</th><th>Wallet Address</th><th>Approved At</th><th>Actions</th></tr>
+                </thead>
+                <tbody id="userTableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <script>
+        const BACKEND_URL = 'https://aml-verify-backend.vercel.app';
+        let adminSecret = '';
+        let autoRefreshInterval = null;
+        let retryCount = 0;
+        const MAX_RETRIES = 3;
+
+        function adminLogin() {
+            const passwordInput = document.getElementById('adminPassword');
+            const loginError = document.getElementById('loginError');
+            const pwd = passwordInput.value.trim();
+
+            if (!pwd) {
+                loginError.textContent = '⚠️ Please enter the admin password.';
+                loginError.style.display = 'block';
+                passwordInput.value = '';
+                passwordInput.focus();
+                return;
+            }
+
+            adminSecret = pwd;
+            loginError.style.display = 'none';
+            loadUsers(false);
+        }
+
+        function showAdminUI(show) {
+            document.getElementById('adminLoginRoot').style.display = show ? 'none' : 'flex';
+            document.getElementById('adminDashboard').style.display = show ? 'block' : 'none';
+        }
+        function hideAllStates() { document.getElementById('loading').style.display = 'none'; document.getElementById('wakeupState').style.display = 'none'; document.getElementById('emptyState').style.display = 'none'; document.getElementById('errorState').style.display = 'none'; document.getElementById('tableContainer').style.display = 'none';}
+        function showLoading() { hideAllStates(); document.getElementById('loading').style.display = 'block'; document.getElementById('totalUsers').textContent = '⏳'; document.getElementById('recentUsers').textContent = '⏳';}
+        function showWakeup() { hideAllStates(); document.getElementById('wakeupState').style.display = 'block'; document.getElementById('retryCount').textContent = retryCount; document.getElementById('totalUsers').textContent = '🔄'; document.getElementById('recentUsers').textContent = '🔄';}
+
+        async function loadUsers(isRetry = false) {
+            try {
+                if (!isRetry) { retryCount = 0; showLoading(); } else { showWakeup(); }
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
+                const response = await fetch(`${BACKEND_URL}/api/get-users`, {
+                    signal: controller.signal,
+                    headers: { 'x-admin-key': adminSecret }
+                });
+                clearTimeout(timeoutId);
+
+                if (response.status === 401) {
+                    showAdminUI(false);
+                    const loginError = document.getElementById('loginError');
+                    loginError.textContent = '❌ Incorrect password. Please try again.';
+                    loginError.style.display = 'block';
+                    const passwordInput = document.getElementById('adminPassword');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                    retryCount = 0;
+                    localStorage.removeItem('adminLogin');
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                retryCount = 0;
+                showAdminUI(true);
+                hideAllStates();
+                localStorage.setItem('adminLogin', Date.now().toString());
+
+                if (data.success && data.users.length > 0) {
+                    displayUsers(data.users);
+                } else {
+                    document.getElementById('emptyState').style.display = 'block';
+                    document.getElementById('totalUsers').textContent = '0';
+                    document.getElementById('recentUsers').textContent = '0';
+                }
+            } catch (error) {
+                console.error('Error loading users:', error);
+                if (retryCount < MAX_RETRIES) {
+                    retryCount++;
+                    showWakeup();
+                    setTimeout(() => loadUsers(true), 10000);
+                } else {
+                    hideAllStates();
+                    document.getElementById('errorState').style.display = 'block';
+                    document.getElementById('totalUsers').textContent = '❌';
+                    document.getElementById('recentUsers').textContent = '❌';
+                }
+            }
+        }
+
+        function adminLogout() {
+            localStorage.removeItem('adminLogin');
+            adminSecret = '';
+            showAdminUI(false);
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('loginError').style.display = 'none';
+        }
+
+        function displayUsers(users) {
+            const now = new Date();
+            const oneDayAgo = new Date(now.getTime() - 24 * 60 * 60 * 1000);
+            const recentCount = users.filter(u => new Date(u.timestamp) > oneDayAgo).length;
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('recentUsers').textContent = recentCount;
+            users.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            const tbody = document.getElementById('userTableBody'); tbody.innerHTML = '';
+            users.forEach((user, index) => {
+                const timestamp = user.timestamp;
+                const date = new Date(timestamp);
+                const timeAgo = getTimeAgo(timestamp);
+                const row = `<tr>
+                    <td><strong>${index + 1}</strong></td>
+                    <td><div class="wallet-address">${user.wallet}</div><a href="https://etherscan.io/address/${user.wallet}" target="_blank" style="font-size:11px;color:#3b82f6;">View on Etherscan →</a></td>
+                    <td style="font-size:13px;">${date.toLocaleString()}<br><small style="color:#64748b;">(${timeAgo})</small></td>
+                    <td><button class="copy-btn" onclick="copyAddress('${user.wallet}')">📋 Copy</button><button class="delete-btn" onclick="deleteUser('${user.wallet}')">🗑️ Delete</button></td>
+                    </tr>`;
+                tbody.innerHTML += row;
+            });
+            document.getElementById('tableContainer').style.display = 'block';
+        }
+        function getTimeAgo(timestamp) {
+            const seconds = Math.floor((Date.now() - new Date(timestamp)) / 1000);
+            if (seconds < 60) return `${seconds}s ago`;
+            if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+            if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+            return `${Math.floor(seconds / 86400)}d ago`;
+        }
+        function copyAddress(address) { navigator.clipboard.writeText(address); alert('✅ Address copied!\n\n'+address);}
+        async function deleteUser(wallet) {
+            if (!confirm(`Are you sure you want to delete:\n${wallet}?`)) return;
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/delete-user`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json', 'x-admin-key': adminSecret },
+                    body: JSON.stringify({ wallet })
+                });
+                const data = await response.json();
+                if (data.success) { alert('✅ User deleted successfully!'); loadUsers(false);}
+                else { alert('❌ Failed to delete user: ' + data.error);}
+            } catch (error) { console.error('Delete error:', error); alert('❌ Error deleting user');}
+        }
+        function autoRefresh() {
+            const btn = document.getElementById('autoRefreshBtn');
+            if (autoRefreshInterval) { clearInterval(autoRefreshInterval); autoRefreshInterval = null; btn.textContent = '⚡ Auto-Refresh (30s)'; btn.style.background = '#3b82f6'; alert('❌ Auto-refresh stopped');}
+            else { autoRefreshInterval = setInterval(() => loadUsers(false), 30000); btn.textContent = '⏸️ Stop Auto-Refresh'; btn.style.background = '#10b981'; alert('✅ Auto-refresh enabled!\n\nChecking for new users every 30 seconds...'); loadUsers(false);}
+        }
+        function exportCSV() {
+            fetch(`${BACKEND_URL}/api/get-users`, { headers: { 'x-admin-key': adminSecret }}).then(res => {
+                if (res.status === 401) { showAdminUI(false); document.getElementById('loginError').style.display = 'block'; document.getElementById('adminPassword').value = ''; throw new Error("Unauthorized");}
+                return res.json();})
+            .then(data => {
+                if (!data.success || data.users.length === 0) { alert('No users to export'); return;}
+                let csv = 'Wallet Address,Approved At\n';
+                data.users.forEach(user => { csv += `${user.wallet},${user.timestamp}\n`;});
+                const blob = new Blob([csv], { type: 'text/csv' }); const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a'); a.href = url; a.download = `users_${new Date().toISOString().split('T')[0]}.csv`; a.click();})
+            .catch(error => { console.error('Export error:', error); alert('Failed to export CSV. Please try again.');});
+        }
+
+        // Use DOMContentLoaded event for session persistence and avoiding null errors
+        document.addEventListener('DOMContentLoaded', function() {
+            const ts = parseInt(localStorage.getItem('adminLogin'), 10);
+            if (!isNaN(ts) && (Date.now() - ts) < (2 * 60 * 60 * 1000)) {
+                showAdminUI(true);
+                loadUsers(false);
+            } else {
+                showAdminUI(false);
+                localStorage.removeItem('adminLogin');
+            }
+        });
+    </script>
+</body>
+</html>

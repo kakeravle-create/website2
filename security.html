@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Favicon - Gradient Badge -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' style='stop-color:%23667eea'/><stop offset='100%25' style='stop-color:%23764ba2'/></linearGradient></defs><circle cx='50' cy='50' r='45' fill='url(%23g)'/><path d='M 30 50 L 45 65 L 70 35' stroke='white' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    
+    <!-- SEO Meta Tags -->
+    <title>Security & Trust - Your Data Protection | CertifyMyCrypto</title>
+    <meta name="description" content="Learn about CertifyMyCrypto's security measures, data protection, and trust standards. Your wallet security is our top priority.">
+    <meta name="keywords" content="CertifyMyCrypto security, wallet security, crypto data protection, blockchain security, trust verification">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Security & Trust - CertifyMyCrypto">
+    <meta property="og:description" content="Industry-leading security and data protection for cryptocurrency verification.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://certifymycrypto.com/security">
+    
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    
+    <!-- Page-Specific Styles -->
+    <style>
+        .security-hero {
+            margin-top: 70px;
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .security-hero::before {
+            content: '🔒';
+            position: absolute;
+            font-size: 300px;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .security-hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .security-hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+            position: relative;
+        }
+
+        .security-content {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .trust-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .stat-box:hover {
+            border-color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #64748b;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .security-section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #64748b;
+        }
+
+        .security-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .security-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .security-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+        }
+
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 25px;
+        }
+
+        .security-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .security-card p {
+            color: #64748b;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .security-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .security-card li {
+            padding: 8px 0;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .security-card li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .guarantee-banner {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 60px 5%;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .guarantee-banner h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .guarantee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .guarantee-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .guarantee-item h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .guarantee-item p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .compliance-section {
+            background: #f8fafc;
+            padding: 60px 5%;
+            border-radius: 20px;
+            margin-bottom: 80px;
+        }
+
+        .compliance-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .compliance-badge {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 150px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .badge-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+
+        .badge-label {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .what-we-protect {
+            margin-bottom: 80px;
+        }
+
+        .protect-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .protect-column h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1e293b;
+        }
+
+        .protect-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .protect-list li {
+            padding: 12px 0;
+            color: #64748b;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            line-height: 1.6;
+        }
+
+        .yes-icon {
+            color: #10b981;
+            font-size: 20px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .no-icon {
+            color: #ef4444;
+            font-size: 20px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .testimonials {
+            margin-bottom: 80px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+        }
+
+        .testimonial-text {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .author-info h4 {
+            font-size: 16px;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .cta-security {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 5%;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .cta-security h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta-security p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 16px 35px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .cta-btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .cta-btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .security-hero h1 {
+                font-size: 32px;
+            }
+
+            .protect-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .cta-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="/" class="logo">🛡️ CertifyMyCrypto</a>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/how-it-works">How It Works</a></li>
+            <li><a href="/faq">FAQ</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/#verify" class="nav-cta">Verify Now</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="security-hero">
+        <h1>Security & Trust</h1>
+        <p>Your security is our top priority. Learn how we protect your data and maintain the highest security standards.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="security-content">
+        <!-- Trust Statistics -->
+        <div class="trust-stats">
+            <div class="stat-box">
+                <div class="stat-icon">🔒</div>
+                <div class="stat-number">256-bit</div>
+                <div class="stat-label">SSL Encryption</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-icon">✓</div>
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Uptime Reliability</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Trusted Users</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-icon">🛡️</div>
+                <div class="stat-number">0</div>
+                <div class="stat-label">Security Breaches</div>
+            </div>
+        </div>
+
+        <!-- Security Measures -->
+        <section class="security-section">
+            <div class="section-header">
+                <h2>Our Security Measures</h2>
+                <p>Industry-leading protection for your data and wallet</p>
+            </div>
+
+            <div class="security-grid">
+                <div class="security-card">
+                    <div class="card-icon">🔐</div>
+                    <h3>End-to-End Encryption</h3>
+                    <p>All data transmissions are protected with military-grade 256-bit SSL/TLS encryption.</p>
+                    <ul>
+                        <li>Encrypted data transmission</li>
+                        <li>Secure API endpoints</li>
+                        <li>HTTPS protocol enforcement</li>
+                        <li>Perfect forward secrecy</li>
+                    </ul>
+                </div>
+
+                <div class="security-card">
+                    <div class="card-icon">🔑</div>
+                    <h3>No Private Key Access</h3>
+                    <p>We never request, store, or have access to your private keys or seed phrases.</p>
+                    <ul>
+                        <li>Read-only blockchain access</li>
+                        <li>Public data analysis only</li>
+                        <li>Web3 standard protocols</li>
+                        <li>Zero custody solution</li>
+                    </ul>
+                </div>
+
+                <div class="security-card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Secure Infrastructure</h3>
+                    <p>Our servers are hosted on enterprise-grade infrastructure with 24/7 monitoring.</p>
+                    <ul>
+                        <li>DDoS protection</li>
+                        <li>Firewall security</li>
+                        <li>Regular security audits</li>
+                        <li>Intrusion detection systems</li>
+                    </ul>
+                </div>
+
+                <div class="security-card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Privacy by Design</h3>
+                    <p>We collect only the minimum data necessary and never sell your information.</p>
+                    <ul>
+                        <li>Minimal data collection</li>
+                        <li>No third-party data sharing</li>
+                        <li>GDPR compliant</li>
+                        <li>Anonymous verification option</li>
+                    </ul>
+                </div>
+
+                <div class="security-card">
+                    <div class="card-icon">🔄</div>
+                    <h3>Regular Updates</h3>
+                    <p>Continuous security updates and patches to protect against emerging threats.</p>
+                    <ul>
+                        <li>Automated security patches</li>
+                        <li>Vulnerability scanning</li>
+                        <li>Security team monitoring</li>
+                        <li>Incident response plan</li>
+                    </ul>
+                </div>
+
+                <div class="security-card">
+                    <div class="card-icon">📋</div>
+                    <h3>Compliance Standards</h3>
+                    <p>We adhere to international security and compliance standards.</p>
+                    <ul>
+                        <li>AML/KYC guidelines</li>
+                        <li>Data protection laws</li>
+                        <li>Industry best practices</li>
+                        <li>Regular compliance audits</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guarantee Banner -->
+        <section class="guarantee-banner">
+            <h2>🛡️ Our Security Guarantee</h2>
+            <p>We're committed to maintaining the highest security standards for your protection</p>
+            
+            <div class="guarantee-grid">
+                <div class="guarantee-item">
+                    <h3>🔒 Zero Fund Access</h3>
+                    <p>We cannot move, access, or control your funds in any way</p>
+                </div>
+
+                <div class="guarantee-item">
+                    <h3>🔐 No Key Storage</h3>
+                    <p>Your private keys never leave your wallet</p>
+                </div>
+
+                <div class="guarantee-item">
+                    <h3>🛡️ Data Protection</h3>
+                    <p>Your data is encrypted and never sold to third parties</p>
+                </div>
+
+                <div class="guarantee-item">
+                    <h3>✓ Transparent Process</h3>
+                    <p>Clear information about what we access and why</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Protect -->
+        <section class="what-we-protect">
+            <div class="section-header">
+                <h2>What We Do & Don't Access</h2>
+                <p>Complete transparency about our data practices</p>
+            </div>
+
+            <div class="protect-grid">
+                <div class="protect-column">
+                    <h3>✅ What We Access</h3>
+                    <ul class="protect-list">
+                        <li>
+                            <span class="yes-icon">✓</span>
+                            <span>Public wallet address (visible on blockchain)</span>
+                        </li>
+                        <li>
+                            <span class="yes-icon">✓</span>
+                            <span>Public transaction history (already on blockchain)</span>
+                        </li>
+                        <li>
+                            <span class="yes-icon">✓</span>
+                            <span>Token balances (public information)</span>
+                        </li>
+                        <li>
+                            <span class="yes-icon">✓</span>
+                            <span>Smart contract interactions (public data)</span>
+                        </li>
+                        <li>
+                            <span class="yes-icon">✓</span>
+                            <span>Wallet age and activity patterns</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="protect-column">
+                    <h3>❌ What We Never Access</h3>
+                    <ul class="protect-list">
+                        <li>
+                            <span class="no-icon">✗</span>
+                            <span>Private keys or seed phrases</span>
+                        </li>
+                        <li>
+                            <span class="no-icon">✗</span>
+                            <span>Wallet passwords or PINs</span>
+                        </li>
+                        <li>
+                            <span class="no-icon">✗</span>
+                            <span>Ability to move your funds</span>
+                        </li>
+                        <li>
+                            <span class="no-icon">✗</span>
+                            <span>Personal identification information</span>
+                        </li>
+                        <li>
+                            <span class="no-icon">✗</span>
+                            <span>Email or contact details (unless provided voluntarily)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compliance Badges -->
+        <section class="compliance-section">
+            <div class="section-header">
+                <h2>Compliance & Standards</h2>
+                <p>We follow industry-leading security and compliance standards</p>
+            </div>
+
+            <div class="compliance-badges">
+                <div class="compliance-badge">
+                    <div class="badge-icon">🔒</div>
+                    <div class="badge-label">SSL/TLS Certified</div>
+                </div>
+
+                <div class="compliance-badge">
+                    <div class="badge-icon">🛡️</div>
+                    <div class="badge-label">GDPR Compliant</div>
+                </div>
+
+                <div class="compliance-badge">
+                    <div class="badge-icon">✓</div>
+                    <div class="badge-label">AML Standards</div>
+                </div>
+
+                <div class="compliance-badge">
+                    <div class="badge-icon">🌐</div>
+                    <div class="badge-label">Web3 Standard</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials">
+            <div class="section-header">
+                <h2>Trusted by Thousands</h2>
+                <p>See what our users say about our security</p>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"I was skeptical at first, but CertifyMyCrypto never asked for my private keys. The whole process was transparent and secure. Highly recommend!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👨‍💼</div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Crypto Trader</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"As a security-conscious user, I appreciate the read-only access approach. My funds stayed safe throughout the entire verification."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👩‍💻</div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Blockchain Developer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Fast, secure, and professional. The security guarantees gave me confidence to verify my exchange wallets without worry."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">👨‍🚀</div>
+                        <div class="author-info">
+                            <h4>David Martinez</h4>
+                            <p>DeFi Investor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-security">
+            <h2>Experience Secure Verification</h2>
+            <p>Join thousands of users who trust CertifyMyCrypto for safe and reliable wallet verification</p>
+            
+            <div class="cta-buttons">
+                <a href="/#verify" class="cta-btn cta-btn-primary">Start Verification</a>
+                <a href="/faq" class="cta-btn cta-btn-secondary">Learn More</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>CertifyMyCrypto</h4>
+                <p style="color: #94a3b8;">Professional cryptocurrency AML compliance verification service.</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/how-it-works">How It Works</a></li>
+                    <li><a href="/security">Security</a></li>
+                    <li><a href="/use-cases">Use Cases</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="/about">About Us</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="/terms">Terms of Service</a></li>
+                    <li><a href="/privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 CertifyMyCrypto. All rights reserved.</p>
+        </div>
+    </footer>
+
+
+    <!-- Shared JavaScript -->
+    <script src="assets/js/shared.js"></script>
+</body>
+</html>
