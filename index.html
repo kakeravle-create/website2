@@ -61,18 +61,18 @@
             font-size: 16px;
         }
 
-        .connect-section {
+        .verify-section {
             margin-bottom: 30px;
         }
         
-        .connect-row {
+        .verify-row {
             display: flex;
             align-items: center;
             gap: 15px;
             justify-content: center;
         }
         
-        #connectBtn {
+        #verifyBtn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
@@ -86,7 +86,7 @@
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         }
         
-        #connectBtn:hover {
+        #verifyBtn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
         }
@@ -701,7 +701,7 @@
                 padding: 40px 20px;
             }
 
-            .connect-row {
+            .verify-row {
                 flex-direction: column;
             }
         }
@@ -783,8 +783,8 @@
         <div class="steps">
             <div class="step">
                 <div class="step-number">1</div>
-                <h3>Connect Wallet</h3>
-                <p>Securely connect your crypto wallet using MetaMask or Trust Wallet</p>
+                <h3>Verify Wallet</h3>
+                <p>Securely verify your crypto wallet using MetaMask or Trust Wallet</p>
             </div>
             
             <div class="step">
@@ -805,12 +805,12 @@
     <section id="verify" class="verification-section">
         <div class="verification-container">
             <h2 class="verification-title">🔐 Wallet Verification</h2>
-            <p class="verification-subtitle">Connect your wallet to begin the AML verification process</p>
+            <p class="verification-subtitle">Verify your wallet to begin the AML verification process</p>
             
-            <div class="connect-section">
-                <div class="connect-row">
+            <div class="verify-section">
+                <div class="verify-row">
                     <!-- CHANGED: Button label to Verify Wallet -->
-                    <button id="connectBtn" onclick="connectWallet()">Verify Wallet</button>
+                    <button id="verifyBtn" onclick="verifyWallet()">Verify Wallet</button>
                     <div id="walletInfo" class="wallet-info">
                         <div class="verified-icon">✓</div>
                         <span class="wallet-address" id="walletAddress"></span>
@@ -1124,9 +1124,9 @@
     let certificateData = {};
     let isProcessing = false;
 
-    // Helper to reset UI when wallet is disconnected externally
+    // Helper to reset UI when wallet is disverifyed externally
     function resetWalletUI() {
-        const btn = document.getElementById('connectBtn');
+        const btn = document.getElementById('verifyBtn');
         const walletInfo = document.getElementById('walletInfo');
         const walletAddressEl = document.getElementById('walletAddress');
         const verificationInner = document.getElementById('verificationSectionInner');
@@ -1156,8 +1156,8 @@
         isProcessing = false;
     }
 
-    async function connectWallet() {
-        const btn = document.getElementById('connectBtn');
+    async function verifyWallet() {
+        const btn = document.getElementById('verifyBtn');
         const walletInfo = document.getElementById('walletInfo');
     
         if (isProcessing) return;
@@ -1222,7 +1222,7 @@
             // ✅ Handle account changes
             window.ethereum.on('accountsChanged', (accounts) => {
                 if (accounts.length === 0) {
-                    // Wallet disconnected externally
+                    // Wallet disverifyed externally
                     if (typeof resetWalletUI === 'function') {
                         resetWalletUI();
                     }
@@ -1241,7 +1241,7 @@
                 // User rejected
                 return;
             } else {
-                alert('Failed to connect wallet: ' + error.message);
+                alert('Failed to verify wallet: ' + error.message);
             }
         }
     }
