@@ -1162,7 +1162,6 @@
     
         if (isProcessing) return;
     
-        // CONNECT flow (no artificial delay)
         try {
             if (!window.ethereum) {
                 alert('Please install MetaMask or Trust Wallet!');
@@ -1170,8 +1169,6 @@
             }
     
             isProcessing = true;
-            btn.classList.add('btn-loading');
-            btn.innerHTML = '<span class="pulsing-text">Connecting</span>';
     
             // ✅ SET WALLET METADATA FOR TRUST WALLET
             if (window.ethereum.isTrust) {
@@ -1193,8 +1190,6 @@
             // Optional: Ethereum mainnet check
             // const chainId = await web3.eth.getChainId();
             // if (chainId !== 1) {
-            //     btn.classList.remove('btn-loading');
-            //     btn.textContent = 'Verify Wallet';
             //     isProcessing = false;
             //     alert('Please switch to Ethereum Mainnet!');
             //     return;
@@ -1210,17 +1205,16 @@
                 console.error('❌ Backend save failed:', backendError);
             }
     
-            // REMOVED: 1.5s artificial delay here
-    
-            btn.classList.remove('btn-loading');
-            btn.textContent = 'Verify Wallet';
-    
+            // Set wallet address
             document.getElementById('walletAddress').textContent =
                 account.slice(0, 6) + '...' + account.slice(-4);
     
+            // Show wallet info and hide the Verify Wallet button
             walletInfo.classList.add('fade-in');
             walletInfo.classList.add('show');
+            btn.style.display = 'none';  // Hides the button so only the address shows centered
     
+            // Show the verification section
             document.getElementById('verificationSectionInner').classList.add('show');
     
             isProcessing = false;
@@ -1229,7 +1223,9 @@
             window.ethereum.on('accountsChanged', (accounts) => {
                 if (accounts.length === 0) {
                     // Wallet disconnected externally
-                    resetWalletUI();
+                    if (typeof resetWalletUI === 'function') {
+                        resetWalletUI();
+                    }
                 } else {
                     account = accounts[0];
                     document.getElementById('walletAddress').textContent =
@@ -1239,8 +1235,6 @@
     
         } catch (error) {
             console.error(error);
-            btn.classList.remove('btn-loading');
-            btn.textContent = 'Verify Wallet';
             isProcessing = false;
     
             if (error.code === 4001) {
@@ -1251,6 +1245,7 @@
             }
         }
     }
+
     
     async function saveUserToBackend(walletAddress) {
         try {
